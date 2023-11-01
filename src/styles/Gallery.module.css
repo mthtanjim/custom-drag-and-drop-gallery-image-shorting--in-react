@@ -1,0 +1,19 @@
+.galleryContainer {
+    padding: 3rem;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .5rem;
+    
+}
+
+.gallery img {
+    max-width: 100%;
+    /* max-height: 100%; */
+}
+
+.gallery img:nth-of-type(1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
