@@ -1,19 +1,45 @@
 .galleryContainer {
-    padding: 3rem;
+  padding: 2rem;
+}
+.deleteBtn {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background-color: rgb(255, 255, 255);
+}
+
+.deleteBtn img {
+    width: 2.5rem;
+}
+.deleteBtn p {
+  color: rgba(128, 128, 128, 0.815);
+  margin-top: 0;
+}
+
+.deleteBtn:hover img {
+  color: red;
+  cursor: pointer;
 }
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: .5rem;
-    
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(400px, 90%), 1fr));
+  gap: 1rem;
 }
 
 .gallery img {
-    max-width: 100%;
-    /* max-height: 100%; */
+  max-width: 100%;
+  cursor: pointer;
+}
+.selected {
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
 }
 
-.gallery img:nth-of-type(1) {
+@media screen and (min-width: 1025px) {
+  .gallery img:nth-of-type(1) {
     grid-column: span 2;
     grid-row: span 2;
   }
+}
