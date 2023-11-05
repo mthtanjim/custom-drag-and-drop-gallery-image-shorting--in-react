@@ -41,6 +41,13 @@
   -webkit-filter: blur(4px);
 }
 
+.transition {
+  transform: scale(1.03);
+  transition: transform 0.7;
+  cursor: move
+
+}
+
 @media screen and (min-width: 1025px) {
   .gallery img:nth-of-type(1) {
     grid-column: span 2 ;

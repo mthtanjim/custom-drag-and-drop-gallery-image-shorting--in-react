@@ -22,7 +22,8 @@ const Gallery = () => {
   ]);
 
   const [selectedImages, setSelectedImages] = useState([]);
-  
+  const [draggedImageIndex, setDraggedImageIndex] = useState(null);
+
 
   const toggleImageSelection = (index) => {
     const isSelected = selectedImages.includes(index);
@@ -41,6 +42,34 @@ const Gallery = () => {
     setSelectedImages([]);
   };
 
+  const handleDragStart = (index) => {
+
+    // document.getElementById('img').style.cursor = "grab"
+    setDraggedImageIndex(index);
+  };
+
+  const handleDragOver = (index) => {
+
+    // document.getElementById('img').style.cursor = "grab"
+    // console.log("document", document)
+    // document.body.style.cursor = "grab";
+    if (draggedImageIndex === null) return;
+    if (draggedImageIndex !== index) {
+      const updatedImages = [...images];
+      const draggedImage = updatedImages[draggedImageIndex];
+      updatedImages.splice(draggedImageIndex, 1);
+      updatedImages.splice(index, 0, draggedImage);
+      setImages(updatedImages);
+      setDraggedImageIndex(index);
+    }
+  };
+
+  const handleDragEnd = () => {
+   
+    // document.body.div.div.div.style.cursor = "grab";
+    setDraggedImageIndex(null);
+  };
+
   return (
     <div className={style.galleryContainer}>
       {selectedImages.length > 0 && (
@@ -52,10 +81,24 @@ const Gallery = () => {
       <div className={style.gallery}>
         {images.map((img, i) => (
           <img
+            key={i}
+            id="img"
             src={img}
             alt=""
+            draggable={true}
+            onDragStart={() => handleDragStart(i)}
+            onDragOver={() => handleDragOver(i)}
+            onDragEnd={handleDragEnd}
+            onDragEnter={() => {
+              document.getElementById('img').style.cursor = "grab"
+              // document.body.style.cursor = "grab";
+            }}
             className={`${selectedImages.includes(i) ? style.selected : ""}`}
             onClick={() => toggleImageSelection(i)}
+            style={{
+              transform: draggedImageIndex === i ? "scale(1.03)" : "scale(1)",
+              transition: "transform 0.7s"
+            }}
           />
         ))}
       </div>
